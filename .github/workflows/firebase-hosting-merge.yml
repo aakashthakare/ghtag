@@ -13,8 +13,8 @@ jobs:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_APPS_D36D2 }}
           channelId: live
-          projectId: apps-d36d2
+          projectId: ${{ secrets.PROJECT_ID }}
       - uses: jsryudev/deploy-firebase-functions@v20.0.0
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-          FIREBASE_PROJECT: firebase-project-id
+          FIREBASE_PROJECT: ${{ secrets.PROJECT_ID }}
