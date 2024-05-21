@@ -10,8 +10,5 @@ Simply add image tag as below in your readme to create a tag.
 ```
  
  ## Example
- <p>
-  <img src="https://apps-d36d2.firebaseapp.com/generateTag?title=Java" /> 
-  <img src="https://apps-d36d2.firebaseapp.com/generateTag?title=C#" /> 
-  <img src="https://apps-d36d2.firebaseapp.com/generateTag?title=Spring" /> 
-</p>
+<img src="https://apps-d36d2.firebaseapp.com/generateTag?title=Java" /> 
+<img src="https://apps-d36d2.firebaseapp.com/generateTag?title=Spring" /> 

@@ -39,19 +39,21 @@ function createSVG(text, color) {
     var textLength = text.length;
 
     var width = (fontWidth * textLength) + fontWidth;
-    var height = fontSize;
+    var height = fontSize * 1.5;
 
     var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
     const rc = rough.svg(svg);
     
     var tagName = document.createElementNS("http://www.w3.org/2000/svg", "text");
     tagName.setAttribute("x", (fontWidth / 2));
-    tagName.setAttribute("y", height + 1);
+    tagName.setAttribute("y", fontSize + 1);
     tagName.setAttribute('style', 'font-family:monospace;font-weight:bold;font-size:'+fontSize+'px;');
     tagName.textContent = text;
 
-    var rectangle = rc.rectangle(0, 0, width , height + (fontSize / 2), {roughness: 0, fill : color, fillStyle: 'solid', stroke: '#8BD8E2'});
+    var rectangle = rc.rectangle(0, 0, width , height, {roughness: 0, fill : color, fillStyle: 'solid', stroke: '#8BD8E2'});
     
+    svg.setAttribute("width", width);
+    svg.setAttribute("height", height);
     svg.appendChild(rectangle);
     svg.appendChild(tagName);
     return svg;
