@@ -7,10 +7,14 @@ const rough = require('roughjs');
 const {onRequest} = require("firebase-functions/v2/https");
 const {initializeApp} = require("firebase-admin/app");
 
+const fontWidth = 16 * 0.6;
+const fontSize = 16;
+const maxTagSize = 30;
+
 initializeApp();
 
 exports.generateTag = onRequest((req, res) => {
-    var text = req.query.title.trim().toUpperCase();
+    var text = req.query.title;
     var color = '#BEEDF3';
    
     let svgXML = xmlSerializer.serializeToString(createSVG(text, color));
@@ -22,33 +26,33 @@ exports.generateTag = onRequest((req, res) => {
 
 
 function createSVG(text, color) {
-    const factor = 12;
-    
-    if(text.length > 10) {
-        text = text.substr(0, 10);
+    if(!text || text.length == 0) {
+        text = '?';
     }
+
+    if(text.length > maxTagSize) {
+        text = text.substr(0, maxTagSize);
+    }
+
+    text = text.trim().toUpperCase();
 
     var textLength = text.length;
 
-    var width = (textLength * factor * 0.6) + factor;
-    var height = factor + (factor * 0.5);
+    var width = (fontWidth * textLength) + fontWidth;
+    var height = fontSize;
 
     var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
     const rc = rough.svg(svg);
     
     var tagName = document.createElementNS("http://www.w3.org/2000/svg", "text");
-    tagName.setAttribute("x", (factor * 0.6));
-    tagName.setAttribute("y", factor);
-    tagName.setAttribute('style', 'font-size:'+factor+'px;padding:1px;font-family:monospace;font-weight:bold;background:'+color+';');
+    tagName.setAttribute("x", (fontWidth / 2));
+    tagName.setAttribute("y", height + 1);
+    tagName.setAttribute('style', 'font-family:monospace;font-weight:bold;font-size:'+fontSize+'px;');
     tagName.textContent = text;
 
-    var rectangle = rc.rectangle(0, 0, width, height, {roughness: 0, fill : color, fillStyle: 'solid', stroke: 'white'});
-    rectangle.appendChild(tagName);
-
-    var svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-    svg.setAttribute('width', width);
-    svg.setAttribute('height', height);
-    svg.setAttributeNS("http://www.w3.org/2000/xmlns/", "xmlns:xlink", "http://www.w3.org/1999/svg");
+    var rectangle = rc.rectangle(0, 0, width , height + (fontSize / 2), {roughness: 0, fill : color, fillStyle: 'solid', stroke: '#8BD8E2'});
+    
     svg.appendChild(rectangle);
+    svg.appendChild(tagName);
     return svg;
 }
