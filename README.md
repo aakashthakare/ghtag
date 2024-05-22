@@ -5,9 +5,21 @@ API to generate the SVG to use in README files of GitHub.
 Simply add image tag as below in your readme to create a tag.
 
 ```
-<img src="https://apps-d36d2.firebaseapp.com/generateTag?title=java" />
+<img src="https://tags.akashthakare.com/generateTag?title=java" />
 ```
  
  ## Examples
 
-<img src="https://apps-d36d2.firebaseapp.com/generateTag?title=Java" /> <img src="https://apps-d36d2.firebaseapp.com/generateTag?title=Spring" /> <img src="https://apps-d36d2.firebaseapp.com/generateTag?title=GitHub" />
+<img src="./imgs/readme/tag.png" width = 40 height = 20 />
+
+
+
+## Commands
+
+### Firebase
+```
+firebase init
+firebase deploy --only functions
+firebase deploy --only hosting
+firebase emulators:start
+```

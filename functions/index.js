@@ -26,6 +26,7 @@ exports.generateTag = onRequest((req, res) => {
 
 
 function createSVG(text, color) {
+    console.log(text);
     if(!text || text.length == 0) {
         text = '?';
     }
